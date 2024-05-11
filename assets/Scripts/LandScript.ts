@@ -1,7 +1,6 @@
-import { _decorator, Component, EventTouch, Node, Sprite, tween } from "cc";
+import { _decorator, Component, EventTouch, find, Node, Sprite } from "cc";
 import { GlobalData } from "./GlobalData";
 import { PoliceScript } from "./PoliceScript";
-import { TheifScript } from "./TheifScript";
 const { ccclass, property } = _decorator;
 
 @ccclass("LandScript")
@@ -18,50 +17,11 @@ export class LandScript extends Component {
   @property(Sprite)
   public bottomLine: Sprite = null;
 
-  isNext(currLand: LandScript, nextLand: LandScript) {
-    const currLandLines = [
-      currLand.leftLine?.name,
-      currLand.rightLine?.name,
-      currLand.topLine?.name,
-      currLand.bottomLine?.name,
-    ];
-
-    const nextLandLines = [
-      nextLand.leftLine?.name,
-      nextLand.rightLine?.name,
-      nextLand.topLine?.name,
-      nextLand.bottomLine?.name,
-    ];
-
-    for (let i = 0; i < currLandLines.length; i++) {
-      if (currLandLines[i]) {
-        for (let j = 0; j < nextLandLines.length; j++) {
-          if (currLandLines[i] === nextLandLines[j]) {
-            return true;
-          }
-        }
-      }
-    }
-    return false;
-  }
-
   start() {
     this.node.on(Node.EventType.TOUCH_END, (event: EventTouch) => {
-      const police = GlobalData.ins.policeRole.getComponent(PoliceScript);
-      const currLand = GlobalData.ins.currLand.getComponent(LandScript);
-      const nextLand = this.getComponent(LandScript);
-      GlobalData.ins.nextLand = nextLand;
+      GlobalData.instance.nextLand = this.getComponent(LandScript);
 
-      if (this.isNext(currLand, nextLand)) {
-        tween(police.node)
-          .to(0.5, { position: nextLand.node.getPosition() })
-          .start();
-        police.currLand = nextLand;
-        GlobalData.ins.clear();
-
-        const theif = GlobalData.ins.theifRole.getComponent(TheifScript);
-        theif.randomMove();
-      }
+      find("Canvas/警察").getComponent(PoliceScript).shift();
     });
   }
 

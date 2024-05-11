@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, Sprite, tween } from "cc";
+import { _decorator, Component, Collider2D, Sprite, tween, Contact2DType, find } from "cc";
 import { GlobalData } from "./GlobalData";
 import { LandScript } from "./LandScript";
 import { LineScript } from "./LineScript";
@@ -7,30 +7,38 @@ const { ccclass, property } = _decorator;
 @ccclass("TheifScript")
 export class TheifScript extends Component {
   @property(Sprite)
-  public currRole: Sprite = null;
-  @property(Sprite)
   public currLand: Sprite = null;
 
+  private shuffledArray = [];
+  private shuffledIndex = 0;
+
   start() {
-    GlobalData.ins.theifRole = this.getComponent(TheifScript);
+    const collider = this.getComponent(Collider2D);
+    if (collider) {
+      collider.on(Contact2DType.BEGIN_CONTACT, this.onContact, this);
+    }
   }
 
-  private shuffledArray = [];
-  private index = 0;
+  onContact(selfCollider: Collider2D, otherCollider: Collider2D) {
+    GlobalData.instance.isTheifConcatPolice = true;
+  }
 
-  shuffleArray(array) {
+  shuffle(array: any[]) {
     const shuffledArray = [...array];
     for (let i = shuffledArray.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
-      [shuffledArray[i], shuffledArray[j]] = [
-        shuffledArray[j],
-        shuffledArray[i],
-      ];
+      [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
     }
     return shuffledArray;
   }
 
-  randomMove() {
+  shift() {
+    if (GlobalData.instance.isPoliceConcatTheif || GlobalData.instance.isTheifConcatPolice) {
+      GlobalData.instance.isPoliceConcatTheif = false;
+      GlobalData.instance.isTheifConcatPolice = false;
+      return;
+    }
+
     const currLand = this.currLand.getComponent(LandScript);
     const names = new Set();
 
@@ -42,8 +50,8 @@ export class TheifScript extends Component {
       currLand.topLine?.getComponent(LineScript).leftLine,
       currLand.topLine?.getComponent(LineScript).rightLine,
       currLand.bottomLine?.getComponent(LineScript).leftLine,
-      currLand.bottomLine?.getComponent(LineScript).rightLine,
-    ].filter((item) => {
+      currLand.bottomLine?.getComponent(LineScript).rightLine
+    ].filter(item => {
       if (item) {
         let name = item.name;
         if (names.has(name) || name === this.currLand.name) {
@@ -55,21 +63,14 @@ export class TheifScript extends Component {
       }
     });
 
-    this.shuffledArray = this.shuffleArray(currLandLines);
+    this.shuffledArray = this.shuffle(currLandLines);
 
-    if (this.index >= this.shuffledArray.length) {
-      this.shuffledArray = this.shuffleArray(currLandLines); // 重新随机化地块数组
-      this.index = 0; // reset index
+    if (this.shuffledIndex >= this.shuffledArray.length) {
+      this.shuffledArray = this.shuffle(currLandLines);
+      this.shuffledIndex = 0;
     }
 
-    const selectedLand = this.shuffledArray[this.index++];
-
-    tween(this.node)
-      .to(0.5, { position: selectedLand.node.getPosition() })
-      .start();
-
-    this.currLand = selectedLand;
+    this.currLand = this.shuffledArray[this.shuffledIndex++];
+    tween(this.node).to(0.3, { position: this.currLand.node.getPosition() }).start();
   }
-
-  update(deltaTime: number) {}
 }

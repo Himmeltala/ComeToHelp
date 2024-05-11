@@ -1,7 +1,7 @@
 [
   {
     "__type__": "cc.Prefab",
-    "_name": "警察",
+    "_name": "小偷",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_native": "",
@@ -13,7 +13,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "警察",
+    "_name": "小偷",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_parent": null,
@@ -28,15 +28,21 @@
       },
       {
         "__id__": 6
+      },
+      {
+        "__id__": 8
+      },
+      {
+        "__id__": 10
       }
     ],
     "_prefab": {
-      "__id__": 8
+      "__id__": 12
     },
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": -442.631,
-      "y": 171.37,
+      "x": 244.514,
+      "y": -98.819,
       "z": 0
     },
     "_lrot": {
@@ -76,8 +82,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 200,
-      "height": 200
+      "width": 80,
+      "height": 80
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -88,7 +94,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "68Bc4UNzJAv6D+b3DDlVxo"
+    "fileId": "f2ff5Yb/JP4Inlgp8NWRIs"
   },
   {
     "__type__": "cc.Sprite",
@@ -113,7 +119,7 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "847e654f-d0b4-4792-85d0-cb47051db9f0@f9941",
+      "__uuid__": "8b1035f3-07fc-4686-97bd-bf66ba574933@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
     "_type": 0,
@@ -133,10 +139,10 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "9aeJib1Y1BpalslYNp0CJ1"
+    "fileId": "87cX9eXr1EP7hrxsTAM/B0"
   },
   {
-    "__type__": "27800nlNRFIraoXjnhcWxce",
+    "__type__": "bb71dmBD95I8I7vSzRC5gnR",
     "_name": "",
     "_objFlags": 0,
     "__editorExtras__": {},
@@ -147,13 +153,80 @@
     "__prefab": {
       "__id__": 7
     },
-    "role": null,
-    "currentLand": null,
+    "currLand": null,
     "_id": ""
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "fegRy4VrdCjY8o3C7nRyfO"
+    "fileId": "deBkX6Nd5Ez7oJKCZx3rcJ"
+  },
+  {
+    "__type__": "cc.BoxCollider2D",
+    "_name": "",
+    "_objFlags": 0,
+    "__editorExtras__": {},
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "__prefab": {
+      "__id__": 9
+    },
+    "tag": 0,
+    "_group": 2,
+    "_density": 1,
+    "_sensor": false,
+    "_friction": 0.2,
+    "_restitution": 0,
+    "_offset": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_size": {
+      "__type__": "cc.Size",
+      "width": 80,
+      "height": 80
+    },
+    "_id": ""
+  },
+  {
+    "__type__": "cc.CompPrefabInfo",
+    "fileId": "ec7RqJWxlDp7QxIJVem7V1"
+  },
+  {
+    "__type__": "cc.RigidBody2D",
+    "_name": "",
+    "_objFlags": 0,
+    "__editorExtras__": {},
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "__prefab": {
+      "__id__": 11
+    },
+    "enabledContactListener": true,
+    "bullet": false,
+    "awakeOnLoad": true,
+    "_group": 2,
+    "_type": 1,
+    "_allowSleep": true,
+    "_gravityScale": 0,
+    "_linearDamping": 0,
+    "_angularDamping": 0,
+    "_linearVelocity": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_angularVelocity": 0,
+    "_fixedRotation": false,
+    "_id": ""
+  },
+  {
+    "__type__": "cc.CompPrefabInfo",
+    "fileId": "4eP8Gj175OXLswFimo9GlO"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -163,7 +236,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "f6ouV04hdI7IaEhILLXWBh",
+    "fileId": "ceq3lPgARIiL1RLKPBkwx7",
     "targetOverrides": null
   }
 ]
