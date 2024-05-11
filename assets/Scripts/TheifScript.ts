@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, Sprite } from "cc";
+import { _decorator, Component, Node, Sprite, tween } from "cc";
 import { GlobalData } from "./GlobalData";
 import { LandScript } from "./LandScript";
 import { LineScript } from "./LineScript";
@@ -63,8 +63,11 @@ export class TheifScript extends Component {
     }
 
     const selectedLand = this.shuffledArray[this.index++];
-    this.node.setPosition(selectedLand.node.getPosition());
-    
+
+    tween(this.node)
+      .to(0.5, { position: selectedLand.node.getPosition() })
+      .start();
+
     this.currLand = selectedLand;
   }
 

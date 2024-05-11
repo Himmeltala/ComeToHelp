@@ -1,12 +1,12 @@
 import {
   _decorator,
   Component,
-  Collider2D,
   EventTouch,
   Node,
   Contact2DType,
   IPhysics2DContact,
   Sprite,
+  Collider2D,
 } from "cc";
 import { GlobalData } from "./GlobalData";
 const { ccclass, property } = _decorator;
@@ -19,7 +19,8 @@ export class PoliceScript extends Component {
   public currLand: Sprite = null;
 
   start() {
-    let collider = this.getComponent(Collider2D);
+    const collider = this.getComponent(Collider2D);
+
     if (collider) {
       collider.on(Contact2DType.BEGIN_CONTACT, this.onBeginContact, this);
       collider.on(Contact2DType.END_CONTACT, this.onEndContact, this);

@@ -1,4 +1,4 @@
-import { _decorator, Component, EventTouch, Node, Sprite } from "cc";
+import { _decorator, Component, EventTouch, Node, Sprite, tween } from "cc";
 import { GlobalData } from "./GlobalData";
 import { PoliceScript } from "./PoliceScript";
 import { TheifScript } from "./TheifScript";
@@ -53,7 +53,9 @@ export class LandScript extends Component {
       GlobalData.ins.nextLand = nextLand;
 
       if (this.isNext(currLand, nextLand)) {
-        police.node.setPosition(nextLand.node.getPosition());
+        tween(police.node)
+          .to(0.5, { position: nextLand.node.getPosition() })
+          .start();
         police.currLand = nextLand;
         GlobalData.ins.clear();
 
