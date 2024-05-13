@@ -3,8 +3,10 @@ export class GlobalData {
   public currLand: any = null;
   public nextLand: any = null;
 
-  public isPoliceConcatTheif: boolean = false;
-  public isTheifConcatPolice: boolean = false;
+  public isPoliceConcatThief: boolean = false;
+  public isThiefConcatPolice: boolean = false;
+
+  public gamedata: any = null;
 
   public clear() {
     this.currLand = null;

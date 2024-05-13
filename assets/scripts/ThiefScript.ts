@@ -1,13 +1,13 @@
 import { _decorator, Component, Collider2D, Sprite, tween, Contact2DType, find } from "cc";
 import { GlobalData } from "./GlobalData";
-import { LandScript } from "./LandScript";
 import { LineScript } from "./LineScript";
+import { LandScript } from "./LandScript";
 const { ccclass, property } = _decorator;
 
-@ccclass("TheifScript")
-export class TheifScript extends Component {
+@ccclass("ThiefScript")
+export class ThiefScript extends Component {
   @property(Sprite)
-  public currLand: Sprite = null;
+  public currLand: any = null;
 
   private shuffledArray = [];
   private shuffledIndex = 0;
@@ -20,7 +20,7 @@ export class TheifScript extends Component {
   }
 
   onContact(selfCollider: Collider2D, otherCollider: Collider2D) {
-    GlobalData.instance.isTheifConcatPolice = true;
+    GlobalData.instance.isThiefConcatPolice = true;
   }
 
   shuffle(array: any[]) {
@@ -33,9 +33,9 @@ export class TheifScript extends Component {
   }
 
   shift() {
-    if (GlobalData.instance.isPoliceConcatTheif || GlobalData.instance.isTheifConcatPolice) {
-      GlobalData.instance.isPoliceConcatTheif = false;
-      GlobalData.instance.isTheifConcatPolice = false;
+    if (GlobalData.instance.isPoliceConcatThief || GlobalData.instance.isThiefConcatPolice) {
+      GlobalData.instance.isPoliceConcatThief = false;
+      GlobalData.instance.isThiefConcatPolice = false;
       return;
     }
 
@@ -43,14 +43,14 @@ export class TheifScript extends Component {
     const names = new Set();
 
     const currLandLines = [
-      currLand.leftLine?.getComponent(LineScript).leftLine,
-      currLand.leftLine?.getComponent(LineScript).rightLine,
-      currLand.rightLine?.getComponent(LineScript).leftLine,
-      currLand.rightLine?.getComponent(LineScript).rightLine,
-      currLand.topLine?.getComponent(LineScript).leftLine,
-      currLand.topLine?.getComponent(LineScript).rightLine,
-      currLand.bottomLine?.getComponent(LineScript).leftLine,
-      currLand.bottomLine?.getComponent(LineScript).rightLine
+      currLand.topLine?.getComponent(LineScript).leftLand,
+      currLand.topLine?.getComponent(LineScript).rightLand,
+      currLand.bottomLine?.getComponent(LineScript).leftLand,
+      currLand.bottomLine?.getComponent(LineScript).rightLand,
+      currLand.leftLine?.getComponent(LineScript).leftLand,
+      currLand.leftLine?.getComponent(LineScript).rightLand,
+      currLand.rightLine?.getComponent(LineScript).leftLand,
+      currLand.rightLine?.getComponent(LineScript).rightLand
     ].filter(item => {
       if (item) {
         let name = item.name;

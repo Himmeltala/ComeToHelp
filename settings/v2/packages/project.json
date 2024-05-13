@@ -16,5 +16,12 @@
       "1": 4,
       "2": 2
     }
+  },
+  "general": {
+    "designResolution": {
+      "width": 360,
+      "height": 748,
+      "fitHeight": true
+    }
   }
 }

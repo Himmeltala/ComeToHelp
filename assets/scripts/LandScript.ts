@@ -6,24 +6,21 @@ const { ccclass, property } = _decorator;
 @ccclass("LandScript")
 export class LandScript extends Component {
   @property(Sprite)
-  public leftLine: Sprite = null;
+  public leftLine: any = null;
 
   @property(Sprite)
-  public rightLine: Sprite = null;
+  public rightLine: any = null;
 
   @property(Sprite)
-  public topLine: Sprite = null;
+  public topLine: any = null;
 
   @property(Sprite)
-  public bottomLine: Sprite = null;
+  public bottomLine: any = null;
 
   start() {
     this.node.on(Node.EventType.TOUCH_END, (event: EventTouch) => {
       GlobalData.instance.nextLand = this.getComponent(LandScript);
-
-      find("Canvas/警察").getComponent(PoliceScript).shift();
+      find("Canvas/Content/警察").getComponent(PoliceScript).shift();
     });
   }
-
-  update(deltaTime: number) {}
 }

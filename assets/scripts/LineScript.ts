@@ -4,12 +4,8 @@ const { ccclass, property } = _decorator;
 @ccclass("LineScript")
 export class LineScript extends Component {
   @property(Sprite)
-  public leftLine: Sprite = null;
+  public leftLand: any = null;
 
   @property(Sprite)
-  public rightLine: Sprite = null;
-
-  start() {}
-
-  update(deltaTime: number) {}
+  public rightLand: any = null;
 }
